@@ -1,0 +1,17 @@
+---
+- name: Remediate Nginx Replicas Low
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Scale web-deployment to 3 replicas
+      kubernetes.core.k8s_scale:
+        api_version: apps/v1
+        kind: Deployment
+        name: web-deployment
+        namespace: web-prod 
+        replicas: 3
+      register: scale_result
+
+    - name: Show remedaiton results
+      ansible.builtin.debug:
+        var: scale_result

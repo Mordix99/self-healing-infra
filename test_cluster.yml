@@ -1,0 +1,14 @@
+---
+- name: test_cluster
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: dowloading data
+      kubernetes.core.k8s_info:
+        kind: Node
+      register: cluster_nodes
+
+    - name: print cluster nodes
+      ansible.builtin.debug:
+        msg: "Węzeł {{ item.metadata.name }}"
+      loop: "{{ cluster_nodes.resources }}"

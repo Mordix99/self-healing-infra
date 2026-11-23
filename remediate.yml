@@ -1,0 +1,8 @@
+---
+- name: remedaite
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: debug
+      ansible.builtin.debug:
+        msg: "Wykryto awarię typu: {{ alertname }}. Inicjuję procedurę naprawczą."

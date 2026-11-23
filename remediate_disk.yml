@@ -1,0 +1,12 @@
+---
+- name: Remediate disk space issue
+  hosts: localhost
+  gather_facts: false
+  tasks:
+   - name: Use python script to clean up disk space
+     ansible.builtin.command: python3 cleaner.py
+     register: cleanup_result
+
+   - name: Check cleanup result
+     ansible.builtin.debug:
+      msg: "Disk cleanup result: {{ cleanup_result.stdout }}"

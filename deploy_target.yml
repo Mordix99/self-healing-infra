@@ -1,0 +1,41 @@
+---
+- name: deploy target
+  hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: Create a k8s namespace
+    kubernetes.core.k8s:
+      api_version: v1
+      kind: Namespace
+      name: web-prod
+      state: present
+  
+  - name: Create a k8s deployment
+    kubernetes.core.k8s:
+      definition:
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: web-deployment
+          namespace: web-prod
+        spec:
+          replicas: 2
+          selector:
+            matchLabels:
+              app: web
+          template:
+            metadata:
+              labels:
+                app: web
+            spec:
+              containers:
+              - name: nginx-container
+                image: nginx:latest
+                ports:
+                - containerPort: 80
+        
+
+     
+  
+
+    

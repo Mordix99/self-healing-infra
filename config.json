@@ -1,0 +1,6 @@
+{
+  "target_directories": [
+    "/tmp/k8s_cache"
+   
+  ]
+}
